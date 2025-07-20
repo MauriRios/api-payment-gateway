@@ -1,4 +1,4 @@
-package com.example.payment_gateway.processors;
+package com.example.payment_gateway.services.processors;
 
 import com.example.payment_gateway.models.dtos.PaymentResponseDTO;
 import com.example.payment_gateway.models.providersdata.AbstractPaymentData;
@@ -17,6 +17,11 @@ public class StripeProcessor implements PaymentProcessor {
     @Override
     public String getProvider() {
         return "STRIPE";
+    }
+
+    @Override
+    public Class<StripePaymentData> getDataClass() {
+        return StripePaymentData.class;
     }
 
     @Override

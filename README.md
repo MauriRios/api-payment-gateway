@@ -27,13 +27,11 @@ Cada uno tiene su propia implementación de:
 ## ➕ ¿Cómo agregar un nuevo proveedor?
 
 1. Crear una clase que extienda `AbstractPaymentData` ejemplo: "MercadoPagoPaymentData" con los datos necesarios del proveedor
-2. Crear una service processor que implemente `PaymentProcessor` ejemplo: "MercadoPagoProcessor" donde va la logica para iniciar el pago
+2. Crear un service processor que implemente `PaymentProcessor` ejemplo: "MercadoPagoProcessor" donde va la logica para iniciar el pago
 3. Registrar el nuevo tipo en `AbstractPaymentData` con la anotación:
-
 ```java
 @JsonSubTypes.Type(value = TuNuevoPaymentData.class, name = "NUEVO_PROVEEDOR")
 ```
-4. Agregar el proveedor en el servicio `PaymentService` Necesario para inicializar la implementacion del proveedor correspondiente de la interfaz `PaymentProcessor` implementacion --> `initiatePayment`
    
 ## 🔐 Variables de entorno necesarias
 

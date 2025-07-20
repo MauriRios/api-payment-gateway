@@ -15,7 +15,7 @@ public class WebSecurityConfig {
     public FilterRegistrationBean<JwtFilter> jwtFilterRegistration() {
         FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(jwtFilter);
-        registrationBean.addUrlPatterns("/api/payments/*"); // ajustá según tus rutas
+        registrationBean.addUrlPatterns("/api/payments/*");
         return registrationBean;
     }
 }

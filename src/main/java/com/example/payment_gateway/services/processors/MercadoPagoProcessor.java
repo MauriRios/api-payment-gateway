@@ -1,4 +1,4 @@
-package com.example.payment_gateway.processors;
+package com.example.payment_gateway.services.processors;
 
 import com.example.payment_gateway.models.dtos.PaymentResponseDTO;
 import com.example.payment_gateway.models.providersdata.AbstractPaymentData;
@@ -21,6 +21,10 @@ public class MercadoPagoProcessor implements PaymentProcessor {
     @Override
     public String getProvider() {
         return "MERCADO_PAGO";
+    }
+    @Override
+    public Class<MercadoPagoPaymentData> getDataClass() {
+        return MercadoPagoPaymentData.class;
     }
     @Override
     public PaymentResponseDTO initiatePayment(AbstractPaymentData data) {
@@ -50,7 +54,7 @@ public class MercadoPagoProcessor implements PaymentProcessor {
             PreferenceClient client = new PreferenceClient();
             Preference preference = client.create(preferenceRequest);
 
-            return new PaymentResponseDTO(preference.getId(), preference.getInitPoint());
+            return new PaymentResponseDTO(preference.getId(), preference.getInitPoint()); // Devuelve el initPoint para pagar y usarlo en nuestro front
         } catch (MPApiException e) {
             throw new RuntimeException("Mercado Pago error: " + e.getApiResponse().getContent());
         } catch (MPException e) {

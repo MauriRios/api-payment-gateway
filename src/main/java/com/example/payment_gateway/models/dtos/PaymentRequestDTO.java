@@ -5,7 +5,6 @@ import com.example.payment_gateway.models.providersdata.MercadoPagoPaymentData;
 import com.example.payment_gateway.models.providersdata.StripePaymentData;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 
 @Data

@@ -5,7 +5,7 @@ import com.example.payment_gateway.models.dtos.PaymentResponseDTO;
 import com.example.payment_gateway.models.providersdata.AbstractPaymentData;
 import com.example.payment_gateway.models.providersdata.MercadoPagoPaymentData;
 import com.example.payment_gateway.models.providersdata.StripePaymentData;
-import com.example.payment_gateway.processors.PaymentProcessor;
+import com.example.payment_gateway.services.processors.PaymentProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -30,18 +30,15 @@ public class PaymentService {
     public PaymentResponseDTO createPayment(PaymentRequestDTO request) {
         String providerKey = request.getProvider().toUpperCase();
 
-        PaymentProcessor processor = processors.get(providerKey);
+        PaymentProcessor<?> processor = processors.get(providerKey);
         if (processor == null) {
-            throw new IllegalArgumentException("Proveedor de pago no soportado: " + providerKey);
+            throw new IllegalArgumentException("Proveedor no soportado: " + providerKey);
         }
 
-        Class<? extends AbstractPaymentData> dataClass = switch (providerKey) {
-            case "MERCADO_PAGO" -> MercadoPagoPaymentData.class;
-            case "STRIPE" -> StripePaymentData.class;
-            default -> throw new IllegalArgumentException("Clase no definida para: " + providerKey);
-        };
-
-        AbstractPaymentData data = objectMapper.convertValue(request.getProviderData(), dataClass);
+        AbstractPaymentData data = objectMapper.convertValue(
+                request.getProviderData(),
+                processor.getDataClass()
+        );
 
         return processor.initiatePayment(data);
     }
