@@ -3,8 +3,6 @@ package com.example.payment_gateway.services;
 import com.example.payment_gateway.models.dtos.PaymentRequestDTO;
 import com.example.payment_gateway.models.dtos.PaymentResponseDTO;
 import com.example.payment_gateway.models.providersdata.AbstractPaymentData;
-import com.example.payment_gateway.models.providersdata.MercadoPagoPaymentData;
-import com.example.payment_gateway.models.providersdata.StripePaymentData;
 import com.example.payment_gateway.services.processors.PaymentProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
